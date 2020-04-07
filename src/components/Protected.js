@@ -2,7 +2,7 @@ import React from 'react';
 
 const Protected = () => {
     return(
-        <div>Protected!</div>
+        <div>This means you're logged in!</div>
     )
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Timeconvert from '../components/Timeconvert'
+
 // import { getjwt } from '../jwt/jwt'
 
 
@@ -53,8 +54,11 @@ export class Register extends Component {
         //data is the object being sent back
         //it has 3 fields
         //access by .token to get the token
-        .then(data => {localStorage.setItem('get-jwt', data.token)})
-        // this.props.history.push('/Protected')
+        
+        .then(data => {localStorage.setItem('the-jwt', data.token);
+        this.props.history.push('/Protected');
+    })
+        
     }
 
 
@@ -69,12 +73,14 @@ export class Register extends Component {
                 view: !this.state.view
             })
         }
+       
+
                
     render() {
         
-        
         if(!this.state.view) {
             return (
+    
                 <div style={theStyle}>
                     <button type="button" onClick={this.view}>Login</button>
                     <form onSubmit={this.register}> 

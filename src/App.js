@@ -3,7 +3,6 @@ import Authcomponent from '../src/components/Authcomponent'
 import Request from '../src/components/Request'
 import Addrequest from '../src/components/Addrequest'
 import Register from '../src/components/Register'
-
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Protected from './components/Protected';
@@ -60,8 +59,15 @@ class App extends Component {
       return (
         <div className="App">
           <button onClick={this.toggle}>Toggle</button>
-          <Register />
-          
+          <BrowserRouter>
+            <Switch>
+              <Route path="/Register" component={Register}/>  
+              <Authcomponent>
+              <Route path="/Protected" component={Protected}/>
+              </Authcomponent>
+                
+            </Switch>
+          </BrowserRouter>
         </div>
       );
     } else {
@@ -71,14 +77,7 @@ class App extends Component {
           <button onClick={this.toggle}>Toggle</button>
           <Request requests={this.state.ticketQue}/>
           <Addrequest />
-          <BrowserRouter>
-            <Switch>
-              <Authcomponent>
-              <Route path="/Protected" component={Protected}/>
-              </Authcomponent>
-                
-            </Switch>
-          </BrowserRouter>
+          
       </div>
       )
       
