@@ -13,7 +13,6 @@ export class Register extends Component {
         this.state = {
             email: "",
             password: "",
-            view: false,
             ticketQue: [],
         }
     }
@@ -34,55 +33,20 @@ export class Register extends Component {
         // .then(res => res.json());
     };
 
-    
-
-
-//authenticate path
-    login = (e) => {
-        e.preventDefault();
-        const body = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        console.log('body', body)
-        fetch(`${baseUrl}/auth`, {
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
-        })
-        .then(res => res.json())
-        //data is the object being sent back
-        //it has 3 fields
-        //access by .token to get the token
-        
-        .then(data => {localStorage.setItem('the-jwt', data.token);
-        this.props.history.push('/Protected');
-    })
-        
-    }
-
-
-
     onChange = (e) => 
         this.setState({
             [e.target.name]: e.target.value
         });
 
-        view = () => {
-            this.setState({
-                view: !this.state.view
-            })
-        }
+       
        
 
                
     render() {
         
-        if(!this.state.view) {
             return (
     
                 <div style={theStyle}>
-                    <button type="button" onClick={this.view}>Login</button>
                     <form onSubmit={this.register}> 
                         Email
                         <input style={inputStyle} type="email" name="email" value={this.state.email} onChange={this.onChange}/> <br />
@@ -90,7 +54,7 @@ export class Register extends Component {
                         <input style={inputStyle} type="password" name="password" value={this.state.password} onChange={this.onChange} /> <br />
                         <button style={inputStyle} type="submit">Create Profile</button>
                     </form>
-                    <div>ticketque <br />
+                    <div> <br />
                         {this.state.ticketQue.map((element, index) => (
                             <div key={index}>
                                 <ul>
@@ -105,29 +69,7 @@ export class Register extends Component {
                     </div>
                 </div>
             )
-        } else {
-            //form to go to authenticate route
-            return (
-                <div style={theStyle}>
-                    {/* <button type="button" onClick={this.view}></button> */}
-                    <form onSubmit={this.login}>
-                        Email
-                        <input style={authStyle} 
-                        type="text" 
-                        name="email" 
-                        value={this.state.email} 
-                        onChange={this.onChange} /> <br />
-                        Password
-                        <input style={authStyle} 
-                        type="password"
-                         name="password" 
-                         value={this.state.password} 
-                         onChange={this.onChange} /> <br />
-                        <button style={authStyle} type="submit">Login</button>
-                    </form>
-                </div>
-            )
-        }
+       
         
     }
 }
@@ -141,11 +83,7 @@ const inputStyle={
     height: "5vh",
     fontSize: "4vh"
 }
-const authStyle = {
-    textAlign: "left",
-    borderColor: "red",
-    backgroundColor: "orange"
-}
+
 
 
 

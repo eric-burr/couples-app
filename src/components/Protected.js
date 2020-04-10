@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-const Protected = () => {
-    return(
-        <div>This means you're logged in!</div>
-    )
+export class Protected extends Component {
+    render() {
+        return (
+            <div>
+                
+                
+                <h1>View tickets </h1>
+            </div>
+        )
+    }
 }
 
-
-export default Protected;
+export default Protected

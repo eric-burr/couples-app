@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+//to make requests with jwt access this needs to be important to be used in post fetch
+import { getjwt } from '../jwt/jwt'
 const baseUrl = "http://localhost:3000"
 
 export class Addrequest extends Component {
@@ -15,16 +16,21 @@ export class Addrequest extends Component {
         })
     }
 
-    createRequest = () => {
-        console.log('title', this.state.title)
-        // e.preventDefault();
+    createRequest = (e) => {
+        // const token = localStorage.getItem('the-jwt', ${jwt})
+        e.preventDefault();
+        //
+
+        const jwt = getjwt();
+        console.log('the jwt is', jwt)
         const body = {
             title: this.state.title,
             subject: this.state.subject
         }
         fetch(`${baseUrl}/ticket`, {
             method: "POST",
-            headers: {'Content-Type': 'application/json'},
+            //where we use authorization as a header with the jwt
+            headers: {'Content-Type': 'application/json', Authorization: `jwt ${jwt}`},
             body: JSON.stringify(body)
         })
 

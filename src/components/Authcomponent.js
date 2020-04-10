@@ -17,10 +17,7 @@ export class Authcomponent extends Component {
     componentDidMount() {
         const jwt = getjwt();
         console.log('one', jwt)
-        if(jwt === undefined) {
-            console.log('two')
-            this.props.history.push('/Addrequest');
-        }
+        
         fetch(`${baseUrl}/ticket`, {
             method: "GET",
             headers: {Authorization: `jwt ${jwt}`}
