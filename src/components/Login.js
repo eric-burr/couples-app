@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Addrequest from './Addrequest'
+// import { element } from 'prop-types'
 const baseUrl = "http://localhost:3000"
 
 export class Login extends Component {
@@ -7,8 +9,10 @@ export class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            userID: ""
         }
     }
+    
 
     login = (e) => {
         e.preventDefault();
@@ -27,8 +31,12 @@ export class Login extends Component {
         //it has 3 fields
         //access by .token to get the token
         
+        // .then(data => data.map(element => <Addrequest id={element.userID}/>))
         .then(data => {localStorage.setItem('the-jwt', data.token);
-        this.props.history.push('/Protected');
+        const read = Object.values(data)
+        console.log('read it', read[3])
+        this.setState({ userID: read[3] })
+        this.props.history.push('/Addrequest');
     })
     
         
@@ -42,6 +50,7 @@ export class Login extends Component {
             [e.target.name]: e.target.value
         });
     render() {
+        
         return (
             <div style={authStyle}>
                 <div style={memberIn}> 
@@ -60,12 +69,10 @@ export class Login extends Component {
                          onChange={this.onChange} /> <br />
                         <button type="submit">Login</button>
                     </form>
-
-                        
-                            <h3 >Not a member?</h3>
-                            <button onClick={this.toLogin} type="button">Create Account</button> 
-                        
+                        <h3 >Not a member?</h3>
+                        <button onClick={this.toLogin} type="button">Create Account</button> 
                 </div>
+                <Addrequest id={this.state.userID}/>
             </div>
         )
     }

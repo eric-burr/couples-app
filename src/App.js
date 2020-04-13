@@ -4,11 +4,10 @@ import Request from '../src/components/Request'
 import Addrequest from '../src/components/Addrequest'
 import Register from '../src/components/Register'
 import Login from '../src/components/Login'
-// import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import Protected from './components/Protected';
 
-const baseUrl = "http://localhost:3000"
+// const baseUrl = "http://localhost:3000"
 
 class App extends Component {
   constructor(props){
@@ -21,14 +20,14 @@ class App extends Component {
      }
   }
 
-  componentDidMount() {
-    fetch(`${baseUrl}/ticket`, {
-        method: "GET",
-        headers: {'Content-Type': 'application/json'}
-    })
-    .then(res => res.json())
-    .then(data => this.setState({ ticketQue: data }))
-}
+//   componentDidMount() {
+//     fetch(`${baseUrl}/ticket`, {
+//         method: "GET",
+//         headers: {'Content-Type': 'application/json'}
+//     })
+//     .then(res => res.json())
+//     .then(data => this.setState({ ticketQue: data }))
+// }
   
 
   onChange = (e) => 
@@ -53,7 +52,7 @@ class App extends Component {
               <Route path="/Login" component={Login}/>
               <Route path="/Register" component={Register}/>  
               <Authcomponent>
-              <Route path="/Protected" component={Addrequest}/>
+              <Route path="/Addrequest" component={Addrequest}/>
               </Authcomponent>
                 
             </Switch>

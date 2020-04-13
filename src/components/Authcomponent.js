@@ -16,21 +16,17 @@ export class Authcomponent extends Component {
     
     componentDidMount() {
         const jwt = getjwt();
-        console.log('one', jwt)
         
         fetch(`${baseUrl}/ticket`, {
             method: "GET",
             headers: {Authorization: `jwt ${jwt}`}
         })
         .then(res => res.json())
-        // .then(data=>console.log('this is', data))
         .then(data => 
             {if(data.code === "InvalidCredentials") {
-            console.log('three' )
             return undefined
         }
     else{
-        console.log('four')
         this.setState({ user: data })
     }}
     )
@@ -39,7 +35,6 @@ export class Authcomponent extends Component {
     }
 
     render() {
-        console.log('state of user is', this.state.user)
         if(this.state.user === undefined) {
             return(
                 <div>
@@ -49,7 +44,6 @@ export class Authcomponent extends Component {
         } else {
             return (
                 <div>
-                    
                     {this.props.children}
                 </div>
             )

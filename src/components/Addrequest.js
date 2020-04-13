@@ -15,6 +15,16 @@ export class Addrequest extends Component {
             clicked: !this.state.clicked
         })
     }
+    componentDidMount() {
+        const jwt = getjwt();
+        fetch(`${baseUrl}/user`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": 'http://localhost:3001', Authorization: `jwt ${jwt}`}
+        })
+        .then(res => res.json())
+        .then(data => console.log('user id i need', data))
+    }
 
     createRequest = (e) => {
         // const token = localStorage.getItem('the-jwt', ${jwt})
@@ -25,7 +35,8 @@ export class Addrequest extends Component {
         console.log('the jwt is', jwt)
         const body = {
             title: this.state.title,
-            subject: this.state.subject
+            subject: this.state.subject,
+            id: this.state._id
         }
         fetch(`${baseUrl}/ticket`, {
             method: "POST",
@@ -42,6 +53,7 @@ export class Addrequest extends Component {
         });
     
     render() {
+        console.log('cornoavirus', this.props.id)
         if(this.state.clicked) {
             return (
                 <div style={theStyle}>
@@ -63,13 +75,13 @@ export class Addrequest extends Component {
                         value={this.state.subject}/>
                         <button type="submit">Send</button>
                     </form>
+                    
                 </div>
             )
         } else {
             return(
                 <div style={theStyle}>
                     <button onClick={this.view}>Create Request</button>
-                    
                 </div>
             )
         }
