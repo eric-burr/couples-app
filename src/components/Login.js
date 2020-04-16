@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Addrequest from './Addrequest'
 // import { element } from 'prop-types'
 const baseUrl = "http://localhost:3000"
 
@@ -9,7 +8,6 @@ export class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            userID: ""
         }
     }
     
@@ -35,7 +33,7 @@ export class Login extends Component {
         .then(data => {localStorage.setItem('the-jwt', data.token);
         const read = Object.values(data)
         console.log('read it', read[3])
-        this.setState({ userID: read[3] })
+        localStorage.setItem('userID', read[3])
         this.props.history.push('/Addrequest');
     })
     
@@ -72,7 +70,6 @@ export class Login extends Component {
                         <h3 >Not a member?</h3>
                         <button onClick={this.toLogin} type="button">Create Account</button> 
                 </div>
-                <Addrequest id={this.state.userID}/>
             </div>
         )
     }

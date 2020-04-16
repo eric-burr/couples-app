@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 //to make requests with jwt access this needs to be important to be used in post fetch
-import { getjwt } from '../jwt/jwt'
+import { getjwt, getID } from '../jwt/jwt'
+
 const baseUrl = "http://localhost:3000"
 
 export class Addrequest extends Component {
     state = {
         clicked: false,
         subject: "",
-        title: ""
+        title: "",
+        id: ""
     }
 
     view = () => {
@@ -15,10 +17,17 @@ export class Addrequest extends Component {
             clicked: !this.state.clicked
         })
     }
+
+    
+    
     componentDidMount() {
         const jwt = getjwt();
-        fetch(`${baseUrl}/user`, {
+        console.log('ghe jwt', jwt)
+        const id = getID();
+        console.log('the id', id)
+        fetch(`${baseUrl}/user/${id}`, {
             method: 'GET',
+            // body: `${this.props.id}`,
             headers: {'Content-Type': 'application/json',
             "Access-Control-Allow-Origin": 'http://localhost:3001', Authorization: `jwt ${jwt}`}
         })
@@ -53,7 +62,8 @@ export class Addrequest extends Component {
         });
     
     render() {
-        console.log('cornoavirus', this.props.id)
+       
+        console.log('writeing it here', this.props.id)
         if(this.state.clicked) {
             return (
                 <div style={theStyle}>
@@ -83,6 +93,7 @@ export class Addrequest extends Component {
                 <div style={theStyle}>
                     <button onClick={this.view}>Create Request</button>
                 </div>
+                
             )
         }
         
