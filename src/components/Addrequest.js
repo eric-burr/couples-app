@@ -9,7 +9,7 @@ export class Addrequest extends Component {
         clicked: false,
         subject: "",
         title: "",
-        id: ""
+        ticket: []
     }
 
     view = () => {
@@ -22,35 +22,38 @@ export class Addrequest extends Component {
     
     componentDidMount() {
         const jwt = getjwt();
-        console.log('ghe jwt', jwt)
         const id = getID();
         console.log('the id', id)
-        fetch(`${baseUrl}/user/${id}`, {
+        fetch(`${baseUrl}/ticket/${id}`, {
             method: 'GET',
             // body: `${this.props.id}`,
             headers: {'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": 'http://localhost:3001', Authorization: `jwt ${jwt}`}
+            "Access-Control-Allow-Origin": 'http://localhost:3001', 
+            Authorization: `jwt ${jwt}`}
         })
         .then(res => res.json())
-        .then(data => console.log('user id i need', data))
+        // .then(data => console.log('tell me', data))
+        .then(data => this.setState({ ticket: data }))
     }
 
     createRequest = (e) => {
         // const token = localStorage.getItem('the-jwt', ${jwt})
         e.preventDefault();
         //
-
+        const id = getID();
         const jwt = getjwt();
         console.log('the jwt is', jwt)
         const body = {
             title: this.state.title,
             subject: this.state.subject,
-            id: this.state._id
+            userID: id
         }
         fetch(`${baseUrl}/ticket`, {
             method: "POST",
             //where we use authorization as a header with the jwt
-            headers: {'Content-Type': 'application/json', Authorization: `jwt ${jwt}`},
+            headers: {'Content-Type': 'application/json', 
+            "Access-Control-Allow-Origin": 'http://localhost:3001',
+            Authorization: `jwt ${jwt}`},
             body: JSON.stringify(body)
         })
 
@@ -63,7 +66,6 @@ export class Addrequest extends Component {
     
     render() {
        
-        console.log('writeing it here', this.props.id)
         if(this.state.clicked) {
             return (
                 <div style={theStyle}>
@@ -92,6 +94,17 @@ export class Addrequest extends Component {
             return(
                 <div style={theStyle}>
                     <button onClick={this.view}>Create Request</button>
+
+                    <h1>Tickets in Que</h1>
+                    <div>{this.state.ticket.map((item, index) => 
+                        <div key={index}>
+                            <h4>Title: {item.title}</h4>
+                            <small>subject: {item.subject}</small>
+                            <div>Time Due: {item.createdAt}</div>
+                            <div>user id: {item.userID}</div>
+                        </div>
+                        
+                        )}</div>
                 </div>
                 
             )

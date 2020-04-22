@@ -19,7 +19,7 @@ export class Authcomponent extends Component {
         
         fetch(`${baseUrl}/ticket`, {
             method: "GET",
-            headers: {Authorization: `jwt ${jwt}`}
+            headers: { Authorization: `jwt ${jwt}`}
         })
         .then(res => res.json())
         .then(data => 

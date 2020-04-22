@@ -29,7 +29,6 @@ export class Login extends Component {
         //it has 3 fields
         //access by .token to get the token
         
-        // .then(data => data.map(element => <Addrequest id={element.userID}/>))
         .then(data => {localStorage.setItem('the-jwt', data.token);
         const read = Object.values(data)
         console.log('read it', read[3])

@@ -31,6 +31,7 @@ export class Register extends Component {
             body: JSON.stringify(body)
         });
         // .then(res => res.json());
+        this.props.history.push('/Login')
     };
 
     onChange = (e) => 
@@ -38,14 +39,8 @@ export class Register extends Component {
             [e.target.name]: e.target.value
         });
 
-       
-       
-
-               
-    render() {
-        
+        render() {
             return (
-    
                 <div style={theStyle}>
                     <form onSubmit={this.register}> 
                         Email
@@ -69,10 +64,8 @@ export class Register extends Component {
                     </div>
                 </div>
             )
-       
-        
+       }
     }
-}
 
 const theStyle={
     textAlign: "center",
