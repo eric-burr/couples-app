@@ -56,16 +56,26 @@ export class Addrequest extends Component {
             Authorization: `jwt ${jwt}`},
             body: JSON.stringify(body)
         })
-
+        .then(window.location.reload());
     }
 
     onChange = (e) => 
         this.setState({
             [e.target.name]: e.target.value
         });
+        
+        complete = (stuff) => {
+            console.log('stuff', stuff)
+            const jwt = getjwt();
+            fetch(`${baseUrl}/ticket`, {
+            method: "PUT",
+            headers: {'Content-Type': 'application/json', Authorization: `jwt ${jwt}`, 
+            "Access-Control-Allow-Origin": 'http://localhost:3001',},
+            body: JSON.stringify(stuff),
+            })
+        }
     
     render() {
-       
         if(this.state.clicked) {
             return (
                 <div style={theStyle}>
@@ -102,9 +112,11 @@ export class Addrequest extends Component {
                             <small>subject: {item.subject}</small>
                             <div>Time Due: {item.createdAt}</div>
                             <div>user id: {item.userID}</div>
+                            <button type='submit' onClick={()=>{this.complete(item)}}>Done</button>
                         </div>
-                        
-                        )}</div>
+                        )}
+                    </div>
+                    
                 </div>
                 
             )
