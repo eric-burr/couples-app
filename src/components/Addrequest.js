@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 //to make requests with jwt access this needs to be important to be used in post fetch
 import { getjwt, getID } from '../jwt/jwt'
+import Logout from './Logout'
 
 const baseUrl = "http://localhost:3000"
 
@@ -103,6 +104,7 @@ export class Addrequest extends Component {
         } else {
             return(
                 <div style={theStyle}>
+                    <Logout />
                     <button onClick={this.view}>Create Request</button>
 
                     <h1>Tickets in Que</h1>

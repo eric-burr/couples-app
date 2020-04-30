@@ -12,7 +12,7 @@ export class Login extends Component {
     }
     
 
-    login = (e) => {
+    login =  (e) => {
         e.preventDefault();
         const body = {
             email: this.state.email,
@@ -33,7 +33,8 @@ export class Login extends Component {
         const read = Object.values(data)
         console.log('read it', read[3])
         localStorage.setItem('userID', read[3])
-        this.props.history.push('/Addrequest');
+        
+        this.props.history.push('/Addrequest')
     })
     
         
@@ -50,6 +51,7 @@ export class Login extends Component {
         
         return (
             <div style={authStyle}>
+                
                 <div style={memberIn}> 
                     <form  onSubmit={this.login}>
                         Email

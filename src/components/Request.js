@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Timeconvert from './Timeconvert'
 
 export class Request extends Component {
    
@@ -11,7 +10,6 @@ export class Request extends Component {
             <div style={theStyle} key={element._id} >
                 <h2>{ element.title }</h2>
                 <small>{ element.subject } </small>
-                <Timeconvert requests={this.props.requests}/>
             </div>
             
         ))

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 //importing jwt function 
 import { getjwt } from '../jwt/jwt'
+import Login from './Login'
 
 const baseUrl = "http://localhost:3000"
 
@@ -26,19 +27,17 @@ export class Authcomponent extends Component {
             {if(data.code === "InvalidCredentials") {
             return undefined
         }
-    else{
+        else{
         this.setState({ user: data })
-    }}
-    )
-        // .then(data => this.setState({ user: data }))
-        
-    }
+        }}
+    )}
 
     render() {
+        
         if(this.state.user === undefined) {
             return(
                 <div>
-                    Loading..
+                    <Login />
                 </div>
             )
         } else {

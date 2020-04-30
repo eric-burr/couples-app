@@ -4,6 +4,7 @@ import Request from '../src/components/Request'
 import Addrequest from '../src/components/Addrequest'
 import Register from '../src/components/Register'
 import Login from '../src/components/Login'
+import Logout from '../src/components/Logout'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import Protected from './components/Protected';
 
@@ -49,6 +50,7 @@ class App extends Component {
           <BrowserRouter>
             <Switch>
               {/* can't be just a / */}
+              <Route path="/Logout" component={Logout} />
               <Route path="/Login" component={Login}/>
               <Route path="/Register" component={Register}/>  
               <Authcomponent>

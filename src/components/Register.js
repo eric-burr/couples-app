@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Timeconvert from '../components/Timeconvert'
 
 // import { getjwt } from '../jwt/jwt'
 
@@ -56,7 +55,6 @@ export class Register extends Component {
                                     <li>{element.title}</li>
                                     <li>{element.subject}</li>
                                     <small>{element.createdAt}</small>
-                                    <li><Timeconvert ticket={this.state.ticketQue}/></li>
                                     {console.log('wat is ticketque in map function', this.state.ticketQue)}
                                 </ul>
                             </div>
