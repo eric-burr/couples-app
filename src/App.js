@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Authcomponent from '../src/components/Authcomponent'
-import Request from '../src/components/Request'
 import Addrequest from '../src/components/Addrequest'
 import Register from '../src/components/Register'
 import Login from '../src/components/Login'
@@ -14,39 +13,23 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-       view: false,
        email: "",
        password: "",
        ticketQue: []
      }
   }
 
-//   componentDidMount() {
-//     fetch(`${baseUrl}/ticket`, {
-//         method: "GET",
-//         headers: {'Content-Type': 'application/json'}
-//     })
-//     .then(res => res.json())
-//     .then(data => this.setState({ ticketQue: data }))
-// }
-  
 
   onChange = (e) => 
         this.setState({
             [e.target.name]: e.target.value
         });
 
-  toggle = () => {
-    this.setState({
-      view: !this.state.view
-    })
-  }
 
   render(){
-    if(!this.state.view) {
       return (
         <div className="App">
-          <button onClick={this.toggle}>Toggle</button>
+          <h2 style={header}>Partners Plea</h2>
           <BrowserRouter>
             <Switch>
               {/* can't be just a / */}
@@ -61,22 +44,14 @@ class App extends Component {
           </BrowserRouter>
         </div>
       );
-    } else {
-      return(
-        <div>
-        Ticket App
-          <button onClick={this.toggle}>Toggle</button>
-          <Request requests={this.state.ticketQue}/>
-          {/* <Addrequest /> */}
-          
-      </div>
-      )
-      
-    }
+   
     
   }
   
 }
 
+const header = {
+  textAlign: "center"
+}
 
 export default App;
