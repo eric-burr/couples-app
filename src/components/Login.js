@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Route, withRouter} from 'react-router-dom';
 // import { element } from 'prop-types'
 const baseUrl = "http://localhost:3000"
 
@@ -47,26 +48,34 @@ export class Login extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+
     render() {
-        
         return (
             <div style={authStyle}>
-                
                 <div style={memberIn}> 
-                    <form  onSubmit={this.login}>
-                        Email
-                        <input 
-                        type="text" 
-                        name="email" 
-                        value={this.state.email} 
-                        onChange={this.onChange} /> <br />
-                        Password
-                        <input 
-                        type="password"
-                         name="password" 
-                         value={this.state.password} 
-                         onChange={this.onChange} /> <br />
-                        <button type="submit">Login</button>
+                    <form style={form} onSubmit={this.login}>
+                        <div style={one}>
+                            Email
+                            <input 
+                            type="text" 
+                            name="email" 
+                            value={this.state.email} 
+                            onChange={this.onChange} />
+                        </div>
+                         {/* <br /> */}
+                         <div style={two}>
+                            Password
+                            <input 
+                            type="password"
+                            name="password" 
+                            value={this.state.password} 
+                            onChange={this.onChange} /> <br />
+                            </div>
+                        <div style={three}>
+                            <button type="submit">Login</button>
+                        </div>
+                        
+
                     </form>
                         <h3 >Not a member?</h3>
                         <button onClick={this.toLogin} type="button">Create Account</button> 
@@ -79,15 +88,26 @@ export class Login extends Component {
 const authStyle = {
     textAlign: "center",
 }
+const one = {
+    backgroundColor: 'red'
+}
+const two = {
+    backgroundColor: 'blue'
+}
+const three = {
+    backgroundColor: 'green'
+}
 
-
+const form = {
+    display: 'grid',
+    gridTemplateRows: '5rem 5rem 5rem',
+}
 const memberIn = {
     position: 'absolute',
     left: '49%',
     top: '50%',
-    transform: 'translate(-50%, -50%)'
-    
+    transform: 'translate(-50%, -50%)',
 }
 
 
-export default Login
+export default withRouter(Login)
